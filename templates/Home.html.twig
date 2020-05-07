@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}
-        <h1>NTM C'est les produits de la merde</h1>
-        <a href="/ajoutProduit"><button type="button" name="button">Ajouter Produit</button></a>
-        <h2>Produits :</h2>
-        <table>
-          {% for p in produits %}
-          <tr>
-            <a href="{{ path('produit', {id: p.id}) }}">
-            <p>{{ p.nom }}</p>
-            </a>
-          </tr>
-          {% endfor %}
-        </table>
-        {% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+{% block body %}
+<a href="/panier"><button class="btn btn-primary">Aller au panier</button></a>
+<a href="/ajoutProduit"><button class="btn btn-primary">Ajouter Produit</button></a>
+<h2>Produits :</h2>
+<table>
+  {% for p in produits %}
+  <tr>
+    <a href="{{ path('produit', {id: p.id}) }}">
+    <p>{{ p.photo }}</p>
+    <p>{{ p.nom }}</p>
+    </a>
+    <a href="{{ path('produitSuppr', {id: p.id}) }}"><button class="btn btn-danger">X</button></a>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+{% block body %}
+{% set nbP = 0 %}
+{% set montantglobal = 0 %}
+<a href="/"><button class="btn btn-secondary">Retour aux produits</button></a>
+<h1>Votre panier :</h1>
+<hr align=left size=5 width="10%">
+<table>
+  {% for p in panier %}
+  <tr>
+    <a href="{{ path('produit', {id: p.produit.id}) }}" style="text-decoration:none">
+    <p>{{ p.produit.nom }}</p>
+    <p>{{ p.produit.photo }}</p>
+    <p>{{'Quantite'|trans}} : {{ p.produit.quantite }}</p>
+    {% set montant = p.produit.quantite * p.produit.prix %}
+    <p>prix total : {{ montant }} €</p>
+    </a>
+    <a href="{{ path('panierSuppr', {id: p.id}) }}"><button class="btn btn-danger">X</button></a>
+    <hr align=left size=5 width="10%">
+  </tr>
+    {% set montantglobal = montantglobal + montant %}
+    {% set nbP = nbP + 1 %}
+  {% endfor %}
+</table>
+
+<table>
+  <th>
+    <li>Nombre de Produit :</li>
+    <li>Montant Global :</li>
+  </th>
+  <td>
+    <li>{{ nbP }}</li>
+    <li>{{ montantglobal }} €</li>
+  </td>
+</table>
+{% endblock %}

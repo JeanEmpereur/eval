@@ -5,7 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit;
+use App\Entity\Panier;
 use App\Form\ProduitType;
+use App\Form\PanierType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -45,23 +47,32 @@ class ProduitController extends AbstractController
 
     public function produit(Produit $produit, Request $request, EntityManagerInterface $em){
 
-        // $panier = new Panier();
-        // $form = $this->createForm(PanierType::class, $panier);
-        // $form->handleRequest($request);
-        //
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $produit = $form->getData();
-        //     $produit->setCreateAt(new \DateTime());
-        //     $em->persist($produit);
-        //     $em->flush();
-        //
-        //     return $this->redirectToRoute("");
-        // }
+        $panier = new Panier();
+        $form = $this->createForm(PanierType::class, $panier);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $panier = $form->getData();
+            $panier->setDateAjout(new \DateTime());
+            $panier->setProduit($produit);
+            $panier->setEtat(True);
+            $em->persist($panier);
+            $em->flush();
+
+            return $this->redirectToRoute("panier");
+        }
 
         return $this->render('produit/produit.html.twig', [
             'p' => $produit,
-            //'form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
+    }
+
+    public function deleteProduit(Produit $produit, EntityManagerInterface $em)
+    {
+        $em->remove($produit);
+        $em->flush();
+
+        return $this->redirectToRoute("home");
     }
 }

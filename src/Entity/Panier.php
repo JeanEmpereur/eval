@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PanierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Produit;
 
 /**
  * @ORM\Entity(repositoryClass=PanierRepository::class)

@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Produit {% endblock %}
 {% block body %}
   <h1>{{ p.nom }}</h1>
   <p>{{ p.photo }}</p>
   <p>{{ p.quantite }}</p>
-  <p>{{ p.prix }}</p>
+  <p>{{ p.prix }} €</p>
 
-  <a href="{{ path('addPanier', {id: p.id}) }}"><button type="button" name="button">Ajouter au Panier</button></a>
+  {{form_start(form)}}
+  <button type="submit" name="button" class="btn btn-primary">Ajouter au panier</button>
+  {{form_end(form)}}
 {% endblock %}

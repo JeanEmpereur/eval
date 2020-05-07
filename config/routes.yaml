@@ -10,10 +10,14 @@ produit:
   path: /produit/{id}
   controller: App\Controller\ProduitController::produit
 
-addPanier:
-  path: /panier/ajoutPanier/{id}
-  controller: App\Controller\PanierController::addPanier
-
 panier:
   path: /panier
   controller: App\Controller\PanierController::panier
+
+panierSuppr:
+  path: /panierSuppr/{id}
+  controller: App\Controller\PanierController::supprProduit
+
+produitSuppr:
+  path: /produit/Suppr/{id}
+  controller: App\Controller\ProduitController::deleteProduit
