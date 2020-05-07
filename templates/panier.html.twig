@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Panier{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        <h1>Votre panier :</h1>
+        <table>
+          {% for p in panier %}
+          <tr>
+            <a href="{{ path('produit', {id: p.produit_id}) }}">
+            <p>{{ p.produit_id }}</p>
+            </a>
+          </tr>
+          {% endfor %}
+        </table>
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

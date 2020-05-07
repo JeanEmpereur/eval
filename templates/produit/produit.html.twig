@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>{{ p.nom }}</h1>
+  <p>{{ p.photo }}</p>
+  <p>{{ p.quantite }}</p>
+  <p>{{ p.prix }}</p>
+
+  <a href="{{ path('addPanier', {id: p.id}) }}"><button type="button" name="button">Ajouter au Panier</button></a>
+{% endblock %}
